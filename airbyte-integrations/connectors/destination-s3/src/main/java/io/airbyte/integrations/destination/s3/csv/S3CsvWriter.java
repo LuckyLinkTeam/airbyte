@@ -56,7 +56,7 @@ public class S3CsvWriter extends BaseS3Writer implements S3Writer {
     // We only need one output stream as we only have one input stream. This is reasonably performant.
     this.outputStream = uploadManager.getMultiPartOutputStreams().get(0);
     this.csvPrinter = new CSVPrinter(new PrintWriter(outputStream, true, StandardCharsets.UTF_8),
-        CSVFormat.DEFAULT.withQuoteMode(QuoteMode.ALL)
+        CSVFormat.DEFAULT.withQuoteMode(QuoteMode.ALL).withDelimiter('|')
             .withHeader(csvSheetGenerator.getHeaderRow().toArray(new String[0])));
   }
 
